@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "lib",
+    "module": "CommonJS",
+    "skipLibCheck": true,
+    "declaration": true,
+    "downlevelIteration": true
+  },
+  "exclude": ["src/**/demo", "src/**/__tests__"]
+}
