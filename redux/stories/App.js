@@ -1,45 +1,20 @@
 import React, { useState, createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { createNewState } from '../src/createNewState'
+import { connect, Provider } from '../src/redux'
+import store from './store'
 
 import './button.css';
 
-const appContext = createContext(null)
-
-const connext = (component) => {
-	const Wrapper = (props) => {
-		const { appState, setAppState } = useContext(appContext)
-	
-		const dispatch = (action) => {
-			setAppState(createNewState(appState, action))
-		}
-	
-		return React.createElement(
-			component,
-			{ dispatch, state: appState },
-			props.children
-		)
-	}
-
-	return Wrapper;
-}
 
 export const App = () => {
-	const [appState, setAppState] = useState({
-		user: { name: 'Frank', age: 18 }
-	})
-
-	const contextValue = { appState, setAppState }
-
-
   return (
-		<appContext.Provider value={contextValue}>
+		<Provider value={store}>
 			<ChillFirst />
 			<ChillSecond />
 			<ChillThird />
-		</appContext.Provider>
-    
+			<ChillLast />
+		</Provider>
   );
 };
 
@@ -51,16 +26,20 @@ App.defaultProps = {
   backgroundColor: null,
 };
 
-const ChillFirst = connext(({ state }) => {
+const ChillFirst = connect(
+	(state) => ({ user: state.user})
+)(({ user }) => {
+	console.log(1)
 	return (
 		<div>
-			<div>{state.user.name}--</div>
+			<div>{user.name}--</div>
 			ChillFirst
 		</div>
 	)
 })
 
 const ChillSecond = () => {
+	console.log(2)
 	return (
 		<div>
 			<UserModifier />
@@ -69,6 +48,7 @@ const ChillSecond = () => {
 }
 
 const ChillThird = () => {
+	console.log(3)
 	return (
 		<div>
 			ChillThird
@@ -76,14 +56,27 @@ const ChillThird = () => {
 	)
 }
 
-const UserModifier = connext(({ dispatch, state }) => {
+const ChillLast = connect(
+	(state) => ({ list: state.msgList })
+)(({ list }) => {
+	console.log(4)
+	return (
+		<div>
+			ChillLast: { list.map(item => item) }
+		</div>
+	)
+})
 
+const UserModifier = connect(
+	(state) => ({ user: state.user }),
+	(dispatch) => ({
+		updateUser: (payload) => dispatch({ type: "updateUser", payload })
+	})
+)(({ updateUser, user }) => {
+	console.log(99)
 	const onChange = (e) => {
-		dispatch({
-			type: 'updateUser',
-			payload: {
-				name: e.target.value
-			}
+		updateUser({
+			name: e.target.value
 		})
 	}
 
@@ -91,7 +84,7 @@ const UserModifier = connext(({ dispatch, state }) => {
 		<div>
 			<input
 				onChange={onChange}
-				value={state.user.name}
+				value={user.name}
 			/>
 		</div>
 	)
