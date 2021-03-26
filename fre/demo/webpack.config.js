@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: "development",
 	entry: {
+    // "batch-updates": "./src/batch-updates.tsx",
 		// benchmark: "./src/benchmark.tsx",
-		'render-props': "./src/render-props.tsx",
+		// 'render-props': "./src/render-props.tsx",
+    "use-state": "./src/use-state.tsx",
 	},
 	output: {
     path: path.resolve(__dirname, './dist'),
