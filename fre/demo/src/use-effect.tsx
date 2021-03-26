@@ -4,7 +4,7 @@ import { h, render, useState, useEffect } from '../../src'
 // import { h, render } from 'preact'
 // import {useState, useEffect } from 'preact/hooks'
 
-function Counter({ id, remove }) {
+function Counter({ id, remove, key }) {
   const [count, setCount] = useState(0)
 
   // useEffect(() => {
@@ -15,7 +15,7 @@ function Counter({ id, remove }) {
   // })
 
   return (
-    <div>
+    <div key={key}>
       Counter {id} is {count}
       &nbsp;
       <button onClick={() => setCount(count + 1)}>➕</button>

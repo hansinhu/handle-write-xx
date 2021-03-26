@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html"
+    "dev": "npx webpack serve"
   },
   "keywords": [],
   "author": "",
@@ -14,9 +14,15 @@
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/preset-react": "^7.0.0",
+    "html-webpack-plugin": "^5.3.1",
     "preact": "^10.0.0",
     "react": "^0.14.0",
-    "react-dom": "^0.0.0-experimental-8b155d261"
+    "react-dom": "^0.0.0-experimental-8b155d261",
+    "ts-loader": "^8.0.18",
+    "typescript": "^4.2.3",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "fre": "^2.0.0-rc.13",

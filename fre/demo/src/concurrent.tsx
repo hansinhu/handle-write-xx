@@ -30,11 +30,11 @@ const App = () => {
   )
 }
 
-const SlowComponent = ({ value }) => {
+const SlowComponent = ({ value, key }) => {
   const start = performance.now()
   while (performance.now() - start < BLOCK_FOR) {}
 
-  return <li className="slow">{value}</li>
+  return <li className="slow" key={key}>{value}</li>
 }
 
 const root = document.getElementById('root')

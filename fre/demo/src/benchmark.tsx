@@ -136,8 +136,8 @@ const GlyphIcon = (
   <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
 )
 
-const Row = ({ selected, item, dispatch }) => (
-  <tr className={selected ? "danger" : ""}>
+const Row = ({ key, selected, item, dispatch }) => (
+  <tr className={selected ? "danger" : ""} key={key}>
     <td className="col-md-1">{item.id}</td>
     <td className="col-md-4">
       <a onClick={() => dispatch({ type: "SELECT", id: item.id })}>
